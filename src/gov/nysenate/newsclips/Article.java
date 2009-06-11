@@ -1,4 +1,4 @@
-package org.nysenatecio.clips;
+package gov.nysenate.newsclips;
 
 public class Article extends Clip {
 

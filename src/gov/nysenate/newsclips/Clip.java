@@ -1,16 +1,25 @@
-package org.nysenatecio.clips;
+package gov.nysenate.newsclips;
 
 import java.util.Date;
 
 public class Clip implements Comparable<Clip> {
 
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
-	@Override
+	
 	public int compareTo(Clip o) {
 	
-		return (o.getSourceName().compareTo(getSourceName()));
+		if (o.getSourceName().compareTo(getSourceName()) == 0)
+				return 0;
+		else
+		{
+			if (o.getSourceRank() > getSourceRank())
+				return -1;
+			else
+				return 1;
+		}
 		
 	}
 

@@ -2,7 +2,7 @@
  * This code is currently released under the Mozilla Public License.
  * http://www.mozilla.org/MPL/
  */
-package org.nysenatecio.clips;
+package gov.nysenate.newsclips;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

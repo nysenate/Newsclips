@@ -1,7 +1,9 @@
-package org.nysenatecio.clips;
+package gov.nysenate.newsclips;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.URLEncoder;
@@ -18,6 +20,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.Map.Entry;
+import java.util.logging.Logger;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -25,9 +28,106 @@ import javax.swing.JOptionPane;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-import com.daylife.src.daypi.DayPIClient;
 
 public class ClipsClient {
+
+	
+	 /**
+	 * @return the sort
+	 */
+	public String getSort() {
+		return sort;
+	}
+
+	/**
+	 * @param sort the sort to set
+	 */
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
+
+	/**
+	 * @return the limitSources
+	 */
+	public boolean isLimitSources() {
+		return limitSources;
+	}
+
+	/**
+	 * @param limitSources the limitSources to set
+	 */
+	public void setLimitSources(boolean limitSources) {
+		this.limitSources = limitSources;
+	}
+
+
+
+	private static final Logger log = Logger.getLogger(ClipsClient.class.getName());
+
+	
+	/**
+	 * @return the output
+	 */
+	public String getOutput() {
+		return output;
+	}
+
+	/**
+	 * @param output the output to set
+	 */
+	public void setOutput(String output) {
+		this.output = output;
+	}
+
+	/**
+	 * @return the processing
+	 */
+	public boolean isProcessing() {
+		return processing;
+	}
+
+	/**
+	 * @param processing the processing to set
+	 */
+	public void setProcessing(boolean processing) {
+		this.processing = processing;
+	}
+
+
+
+	String output = null;
+	boolean processing = false;
+	
+	/**
+	 * @return the sourceTypeFilter
+	 */
+	public int getSourceTypeFilter() {
+		return sourceTypeFilter;
+	}
+
+	/**
+	 * @param sourceTypeFilter the sourceTypeFilter to set
+	 */
+	public void setSourceTypeFilter(int sourceTypeFilter) {
+		this.sourceTypeFilter = sourceTypeFilter;
+	}
+
+	/**
+	 * @return the sourceRankFilter
+	 */
+	public int getSourceRankFilter() {
+		return sourceRankFilter;
+	}
+
+	/**
+	 * @param sourceRankFilter the sourceRankFilter to set
+	 */
+	public void setSourceRankFilter(int sourceRankFilter) {
+		this.sourceRankFilter = sourceRankFilter;
+	}
+
+
+
 
 	/*
 	 * 
@@ -44,39 +144,32 @@ public class ClipsClient {
 	public final static String BASE_QUERY = " AND \"New York\"";
 	public final static String BASE_QUERY_SENATE = "(Senate OR Senator OR Sen OR Sen.) AND ";
 	
-	public final static int SEARCH_DELAY = 250;
+	public final static int SEARCH_DELAY = 150;
 	
 	public final static int MAX_CONTENT_LENGTH = 1000;
 	
-	public final static String LYNX_CMD = "/Applications/Lynxlet.app/Contents/Resources/termlet -dump ";
+	public final static String LYNX_CMD = "/usr/bin/lynx -dump ";
 	
 	public final static String SOURCE_FILTER_ID = "0gqJ7mBcQE3xN";
 	
-	String accesskey = "d5ceda3ae288b7b214e09378aeab8689";
-	String sharedsecret = "bbf7f048d6e81a07a1c09851e6536759";
+	String accesskey = null;
+	String sharedsecret = null; 
 	String server = "freeapi.daylife.com";
 	String version = "4.2";
 	
 	String sort = "relevance";
 	
-	String max = "50";
+	String max = "25";
 	
 	int sectionmax = 25;
 	int anchorLength = 15;
 	
-	public final static String FULL_STORIES_DIVIDER = "<hr/><div style=\"background-color:#eee;padding:3px;font-size:20pt;\">Full Stories</div><br/><br/>";
+	int sourceTypeFilter = -1;
+	int sourceRankFilter = -1;
+	boolean limitSources = true;
 	
-	public static void main(String[] args) throws Exception {
-		
-		StringBuffer sb = new StringBuffer ();
-		for (int i = 0; i < args.length; i++)
-		{
-			sb.append(args[i]);
-			sb.append(' ');
-		}
-		
-		new ClipsClient(sb.toString().trim());
-	}
+	public final static String FULL_STORIES_DIVIDER = "<hr/><div><h2>Full Stories</h2></div>";
+	public final static String EXCERPT_STORIES_DIVIDER = "<hr/><div><h2>Story Excerpts</h2></div>";
 	
 	public ClipsClient ()
 	{
@@ -91,22 +184,6 @@ public class ClipsClient {
 		if (cmd.length() == 0)
 		{
 			
-			
-			cmd = JOptionPane.showInputDialog(null, "Enter 'senate', 'topics' or a keyword search:", "NY Senate Clips Client", 1);
-			
-			//Create a file chooser
-			final JFileChooser fc = new JFileChooser();
-			
-			int returnVal = fc.showSaveDialog(null);
-
-	        if (returnVal == JFileChooser.APPROVE_OPTION) {
-	            file = fc.getSelectedFile();
-	        } 
-
-	        JOptionPane.showMessageDialog(null,
-	        	    "Press OK to start your search...", 
-	        	    "NY Senate Clips Client", JOptionPane.INFORMATION_MESSAGE);
-
 		}
 		
 		/*
@@ -126,30 +203,38 @@ public class ClipsClient {
 		
 		if (cmd.toLowerCase().equals("senate"))
 		{
-			doSenateClips (System.out, null, null, false);
+			doSenateClips (null, null, false);
 		}
 		else if (cmd.toLowerCase().equals("topics"))
 		{
 			String topics = "State Senate";
-			doTopicClips (topics, System.out, null, null, false);
+			doTopicClips (topics, null, null, false);
 		}
 		else
-			doKeywordClips (cmd, System.out, null, null, false);
+			doKeywordClips (cmd, null, null, false);
 		
 		if (file != null)
 		{
 			
-			JOptionPane.showMessageDialog(null,
-	        	    "Your search is complete!", 
-	        	    "NY Senate Clips Client", JOptionPane.INFORMATION_MESSAGE);
+			
 		}
 		
 		System.exit(0);
 	}
 	
-	public void doSenateClips (OutputStream os, Date startTime, Date endTime, boolean fullArticles)
+	Date startTime;
+	Date endTime;
+	boolean fullArticles;
+	
+	public void doSenateClips (Date startTime, Date endTime, boolean fullArticles)
 	{
+		this.startTime= startTime;
+		this.endTime = endTime;
+		this.fullArticles = fullArticles;
 		
+		processing = true;
+		
+		output = null;
 		
 		if (startTime == null)
 			{
@@ -190,13 +275,7 @@ public class ClipsClient {
 			Map input = new HashMap();
 			String cmd = null;
 			
-			if (SENATOR_TOPIC_IDS[i][1].equals("LABEL"))
-			{
-				out.append("<h1 style=\"background-color:#eee;padding:3px;\">" + SENATOR_TOPIC_IDS[i][0] + "</h1>");
-				
-				continue;
-				
-			}
+			
 				
 			if (SENATOR_TOPIC_IDS[i][0].length() > 0)
 			{
@@ -209,6 +288,7 @@ public class ClipsClient {
 			}
 			else
 			{
+				
 				input.put("query", BASE_QUERY_SENATE + "\"" + SENATOR_TOPIC_IDS[i][1] + "\"");
 				cmd = "search_getRelatedArticles";
 				
@@ -219,7 +299,14 @@ public class ClipsClient {
 			input.put("start_time", DATEFORMAT.format(startTime.getTime()));
 			input.put("end_time", DATEFORMAT.format(endTime));
 			
-			input.put("source_filter_id",SOURCE_FILTER_ID);
+			if (limitSources)
+				input.put("source_filter_id",SOURCE_FILTER_ID);
+			/*
+			StringBuffer sourceWhitelist = new StringBuffer();
+			sourceWhitelist.append("0a0F0VifAodow");
+			
+			input.put("source_whitelist",sourceWhitelist.toString());
+			*/
 			
 			//make the API call
 			Document doc = client.call(cmd, input);
@@ -244,9 +331,20 @@ public class ClipsClient {
 				countKey = SENATOR_TOPIC_IDS[i][0];
 			}
 			
-			buildClips(doc,"article", sresults, null);
 			
-			System.out.println("topic-id: " + SENATOR_TOPIC_IDS[i][0] + "(" + SENATOR_TOPIC_IDS[i][1] + ")" + " = " + sresults.size());
+			if (SENATOR_TOPIC_IDS[i][1].equals("LABEL"))
+			{
+				out.append("<h1>" + SENATOR_TOPIC_IDS[i][0] + "</h1>");
+				
+				continue;
+				
+			}
+			
+			buildClips(doc,"article", sresults, (String)input.get("query"), fullArticles);
+			
+			//sresults = filterResults (sresults);
+			
+			log.info("topic-id: " + SENATOR_TOPIC_IDS[i][0] + "(" + SENATOR_TOPIC_IDS[i][1] + ")" + " = " + sresults.size());
 			
 			if (SENATOR_TOPIC_IDS[i][0].length()>0)
 			{
@@ -256,10 +354,6 @@ public class ClipsClient {
 			if (sresults.size()> 0)
 			{
 				
-				
-				
-				
-			
 				Iterator<Clip> itclips = sresults.values().iterator();
 				Clip clip = null;
 				
@@ -274,8 +368,10 @@ public class ClipsClient {
 			try { Thread.sleep(SEARCH_DELAY); } catch (Exception e){}
 		}
 		
-		
-		out.append(FULL_STORIES_DIVIDER);
+		if (fullArticles)
+			out.append(FULL_STORIES_DIVIDER);
+		else
+			out.append(EXCERPT_STORIES_DIVIDER);
 		
 		String pageText = renderHTMLPages(fullpages.values(), fullArticles);
 		fullPageText.append(pageText);
@@ -288,10 +384,9 @@ public class ClipsClient {
 		
 		out = new StringBuffer();
 		
-		out.append("<style>body {  }  li { margin:6px }</style>");
-		out.append("<h1 style=\"background-color:#eee;padding:3px;\">Senate Names News Clips</h1>");
-		out.append("Timespan: " + startTime.toLocaleString() + " to " + endTime.toLocaleString());
-		out.append("<hr/>");
+	//	out.append("<h1>Senate Names News Clips</h1>");
+	//	out.append("Timespan: " + startTime.toLocaleString() + " to " + endTime.toLocaleString());
+	//	out.append("<hr/>");
 		
 		Iterator<Entry<String,Integer>> itResultCount = resultCount.entrySet().iterator();
 		
@@ -312,7 +407,7 @@ public class ClipsClient {
 			
 			if (clipsCount > 0)
 			{
-			out.append("<a href=\"#" + anchor + "\">" + entry.getKey() + "</a>(" + entry.getValue() + ")  ");
+			out.append("<a href=\"#" + anchor + "\">" + entry.getKey() + "</a>(" + entry.getValue() + ")&nbsp;&nbsp;");
 			}
 		}
 		
@@ -333,18 +428,42 @@ public class ClipsClient {
 		
 		try
 		{
-			
-			os.write(out.toString().getBytes());
-			
+			output = out.toString();
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
+		
+		processing = false;
+		
 	}
 	
-	public void doTopicClips (String topics, OutputStream os, Date startTime, Date endTime, boolean fullArticles)
+	public void doTopicClips (String topics, Date startTime, Date endTime, boolean fullArticles)
 	{
+		output = null;
+		processing = true;
+		String line = null;
+		
+		if (topics == null)
+		{
+			topics = "";
+			
+			try {
+				File file = new File("../webapps/nysclips/WEB-INF/classes/topics.txt");
+				System.out.println("file:" + file.getAbsolutePath());
+				BufferedReader reader = new BufferedReader(new FileReader(file));
+				while ((line = reader.readLine())!=null)
+				{
+					topics += line + "\r\n";
+				}
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		//initialize the daypi client
 		DayPIClient client = new DayPIClient(accesskey, sharedsecret, server, version);
 		
@@ -369,10 +488,6 @@ public class ClipsClient {
 		
 		StringBuffer fullPageText = new StringBuffer();
 		
-		out.append("<style>body {  } li { margin:6px }</style>");
-		out.append("<a name=\"top\"><h1 style=\"background-color:#eee;padding:3px;\">Topic Clips</h1></a>");
-		out.append("Timespan: " + startTime.toLocaleString() + " to " + endTime.toLocaleString());
-		out.append("<hr/>");
 		
 		StringTokenizer st = new StringTokenizer (topics,"\r\n");
 		StringTokenizer stLine = null;
@@ -385,7 +500,7 @@ public class ClipsClient {
 		
 		String token = null;
 		String sectionTitle = null;
-		String line = null;
+		
 		int thisDepth = -1;
 		int lastDepth = -1;
 		
@@ -395,7 +510,7 @@ public class ClipsClient {
 			stLine  = new StringTokenizer (line,".");
 			thisDepth = stLine.countTokens() ;
 			
-			if (thisDepth == 2)
+			if (thisDepth == 3)
 			{
 				
 				if (sresults != null)
@@ -405,8 +520,8 @@ public class ClipsClient {
 					if (sectionClips.size() > 0)
 					{
 						
-						System.out.println("***rendering previous section headlines: " + sectionClips.size() + " found");
-						out.append("<h3 style=\"background-color:#eee;padding:3px;\">" + sectionTitle + "</h3>");
+						log.info("***rendering previous section headlines: " + sectionClips.size() + " found");
+						//out.append("<h3>" + sectionTitle + "</h3>");
 						//render previous main section
 						out.append(renderHTMLHeadlines(sectionClips));
 						fullpages.putAll(sresults);
@@ -414,24 +529,24 @@ public class ClipsClient {
 					
 				}
 				
-				System.out.println("***new header line: " + line);
+				log.info("***new header line: " + line);
 				
 				sresults = new LinkedHashMap<String,Clip>();
 				
 				stLine.nextToken();
-				
-				out.append("<h2 style=\"background-color:#eee;padding:3px;\">" + stLine.nextToken() + "</h2>");
+				stLine.nextToken();
+				sectionTitle = stLine.nextToken();
+				out.append("<h3>" + sectionTitle + "</h3>");
 				
 				
 				parentQuery = "";
-				query = null;
+				query = sectionTitle;
 				lastDepth = 3;
-				continue;
+				
 			}
 			
-			if (thisDepth == 3)
+			if (thisDepth == 2)
 			{
-				
 				
 				if (sresults != null)
 				{
@@ -439,8 +554,8 @@ public class ClipsClient {
 					
 					if (sectionClips.size() > 0)
 					{
-						System.out.println("***rendering section headlines: " + sectionClips.size() + " found");
-						out.append("<h3 style=\"background-color:#eee;padding:3px;\">" + sectionTitle + "</h3>");
+						log.info("***rendering section headlines: " + sectionClips.size() + " found");
+						//out.append("<h3>" + sectionTitle + "</h3>");
 						
 						//render previous main section
 						out.append(renderHTMLHeadlines(sectionClips));
@@ -448,13 +563,14 @@ public class ClipsClient {
 					}
 				}
 				
-				System.out.println("***new subheader line: " + line);
+				log.info("***new subheader line: " + line);
 				
 				sresults = new LinkedHashMap<String,Clip>();
 				
 				stLine.nextToken();
-				stLine.nextToken();
-				sectionTitle = stLine.nextToken();
+				
+				sectionTitle = stLine.nextToken().trim();
+				out.append("<h2>" + sectionTitle + "</h2>");
 				
 				parentQuery = sectionTitle;
 				query = null;
@@ -488,15 +604,16 @@ public class ClipsClient {
 			input.put("sort",sort);
 			input.put("start_time", DATEFORMAT.format(startTime.getTime()));
 			input.put("end_time", DATEFORMAT.format(endTime));
-			input.put("source_filter_id",SOURCE_FILTER_ID);
 			
+			if (limitSources)
+				input.put("source_filter_id",SOURCE_FILTER_ID);
 			
 			//make the API call
 			Document doc = client.call("search_getRelatedArticles", input);
 			
-			//System.out.println("query: " + thisQuery);
+			log.info("query: " + thisQuery);
 			
-			buildClips(doc,"article", sresults, thisQuery);
+			buildClips(doc,"article", sresults, thisQuery, fullArticles);
 			
 			try { Thread.sleep(SEARCH_DELAY); } catch (Exception e){}
 			
@@ -505,41 +622,44 @@ public class ClipsClient {
 				if (thisDepth > lastDepth)
 				{
 					parentQuery = query + ' ' + parentQuery;
-					System.out.println("growing parent query: " + parentQuery);
+					log.info("growing parent query: " + parentQuery);
 				}
 				else if (thisDepth < lastDepth)
 				{
 					parentQuery = sectionTitle;
-					System.out.println("shrinking parent query: " + parentQuery);
+					log.info("shrinking parent query: " + parentQuery);
 				}
 			}
 			
 			lastDepth = thisDepth;
 			
 		}
-			
+		
+	/*
 		if (sectionClips.size() > 0)
 		{
-			out.append("<h3 style=\"background-color:#eee;padding:3px;\">" + sectionTitle + "</h3>");
+			out.append("<h3>" + sectionTitle + "</h3>");
 			//render previous main section
 			out.append(renderHTMLHeadlines(sectionClips));
 			fullpages.putAll(sresults);
-		}
+		}*/
 		
 		//Render final headlines
 		sectionClips = sresults.values();
-		System.out.println("***rendering previous section headlines: " + sectionClips.size() + " found");
+		log.info("***rendering previous section headlines: " + sectionClips.size() + " found");
 		//render previous main section
 		out.append(renderHTMLHeadlines(sectionClips));
 		fullpages.putAll(sresults);
 		
-		out.append(FULL_STORIES_DIVIDER);
+		if (fullArticles)
+			out.append(FULL_STORIES_DIVIDER);
+		else
+			out.append(EXCERPT_STORIES_DIVIDER);
 		
 		String pageText = renderHTMLPages(fullpages.values(), fullArticles);
 		fullPageText.append(pageText);
 		
 		pageText = highlightSenatorNames(fullPageText.toString());
-		
 		
 		out.append(pageText);
 		
@@ -547,9 +667,8 @@ public class ClipsClient {
 		try
 		{
 			
-			
-			os.write(out.toString().getBytes());
-			
+			output = out.toString();
+			processing = false;
 			
 		}
 		catch (Exception e)
@@ -559,9 +678,11 @@ public class ClipsClient {
 	}
 	
 	
-	public void doKeywordClips (String term, OutputStream os, Date startTime, Date endTime, boolean fullArticles)
+	public void doKeywordClips (String term, Date startTime, Date endTime, boolean fullArticles)
 	{
 		
+		output = null;
+		processing = true;
 		
 		if (startTime == null)
 		{
@@ -587,13 +708,7 @@ public class ClipsClient {
 		StringBuffer fullPageText = new StringBuffer();
 		
 		
-		out.append("<style>body {  }</style>");
-		out.append("<h1 style=\"background-color:#eee;padding:3px;\">Topic Clips: Keyword Search</h1>");
-		out.append("Timespan: " + startTime.toLocaleString() + " to " + endTime.toLocaleString());
-		out.append("<hr/>");
 	
-		
-		
 		//initialize the daypi client
 		DayPIClient client = new DayPIClient(accesskey, sharedsecret, server, version);
 		
@@ -618,16 +733,18 @@ public class ClipsClient {
 			
 			input.put("start_time", DATEFORMAT.format(startTime.getTime()));
 			input.put("end_time", DATEFORMAT.format(endTime));
-			input.put("source_filter_id",SOURCE_FILTER_ID);
+			
+			if (limitSources)
+				input.put("source_filter_id",SOURCE_FILTER_ID);
 			
 			//input.put("source_whitelist",SOURCE_WHITELIST[s]);
 			
 			//make the API call
 			Document doc = client.call("search_getRelatedArticles", input);
 			
-			buildClips(doc,"article", sresults, term);
+			buildClips(doc,"article", sresults, term, fullArticles);
 			
-			System.out.println("query: " + term + " = " + sresults.size());
+			log.info("query: " + term + " = " + sresults.size());
 			
 			if (sresults.size()> 0)
 			{
@@ -654,7 +771,10 @@ public class ClipsClient {
 		
 		//}
 		
-		out.append(FULL_STORIES_DIVIDER);
+		if (fullArticles)
+			out.append(FULL_STORIES_DIVIDER);
+		else
+			out.append(EXCERPT_STORIES_DIVIDER);
 			
 		String pageText = renderHTMLPages(fullpages.values(), fullArticles);
 		fullPageText.append(pageText);
@@ -666,8 +786,8 @@ public class ClipsClient {
 		
 		try
 		{
-			os.write(out.toString().getBytes());
-			
+			output = out.toString();
+			processing = false;
 		}
 		catch (Exception e)
 		{
@@ -675,7 +795,36 @@ public class ClipsClient {
 		}
 	}
 	
-	public LinkedHashMap<String, Clip> buildClips (Document doc, String type, LinkedHashMap<String, Clip> results, String queryTerm)
+	//log.info("source: " + clip.getSourceName() + " rank=" + clip.getSourceRank() + " type=" + clip.getSourceType());
+	
+	public LinkedHashMap<String, Clip> filterResults (LinkedHashMap<String, Clip> results)
+	{
+		
+		Iterator<String> it = results.keySet().iterator();
+		Clip clip = null;
+		String key = null;
+		
+		while (it.hasNext())
+		{
+			key = it.next();
+			clip = results.get(key);
+			
+			if (clip.getSourceType() != 1)
+			{
+				results.remove(key);
+			}
+			
+			if (clip.getSourceRank() > 4)
+			{
+				results.remove(key);
+			}
+		}
+		
+		return results;
+	}
+	
+	
+	public LinkedHashMap<String, Clip> buildClips (Document doc, String type, LinkedHashMap<String, Clip> results, String queryTerm, boolean fullArticles)
 	{
 		int uniqHits = 0;
 		
@@ -689,7 +838,7 @@ public class ClipsClient {
 		
 		for (int i = 0; i < nodes.getLength(); i++)
 		{
-			//System.out.println(nodes.item(i).getTextContent());
+			//log.info(nodes.item(i).getTextContent());
 			NodeList storyNodes = nodes.item(i).getChildNodes();
 			
 			hits = storyNodes.getLength();
@@ -699,7 +848,7 @@ public class ClipsClient {
 			for (int n = 0; n < storyNodes.getLength(); n++)
 			{
 				String nodeName = storyNodes.item(n).getNodeName();
-				String content = storyNodes.item(n).getTextContent();
+				String content = storyNodes.item(n).getFirstChild().getNodeValue(); //1.5 change
 				
 				//headline
 				if (nodeName.equals("headline"))
@@ -731,9 +880,16 @@ public class ClipsClient {
 				{
 					NodeList sourceNodes = storyNodes.item(n).getChildNodes();
 					
+					/*
 					clip.setSourceName(sourceNodes.item(0).getTextContent());
 					clip.setSourceRank(Integer.parseInt(sourceNodes.item(3).getTextContent()));
 					clip.setSourceType(Integer.parseInt(sourceNodes.item(5).getTextContent()));
+					*/
+					
+					clip.setSourceName(sourceNodes.item(0).getFirstChild().getNodeValue());
+					clip.setSourceRank(Integer.parseInt(sourceNodes.item(3).getFirstChild().getNodeValue()));
+					clip.setSourceType(Integer.parseInt(sourceNodes.item(5).getFirstChild().getNodeValue()));
+					
 				}
 				
 				//url
@@ -768,7 +924,7 @@ public class ClipsClient {
 					continue;
 				}
 				
-			//	System.out.println("headline: " + clip.getHeadline());
+			//	log.info("headline: " + clip.getHeadline());
 				
 				Clip storedClip = results.get(clip.getHeadline());
 				
@@ -790,19 +946,50 @@ public class ClipsClient {
 					
 					if (queryTerm != null)
 					{
-					if (storedClip.getMatchingTerms().indexOf(queryTerm)==-1)
-						storedClip.setMatchingTerms(storedClip.getMatchingTerms() + ", " + queryTerm);
+						if (storedClip.getMatchingTerms() == null)
+							storedClip.setMatchingTerms(queryTerm);
+						else if (storedClip.getMatchingTerms().indexOf(queryTerm)==-1)
+							storedClip.setMatchingTerms(storedClip.getMatchingTerms() + ", " + queryTerm);
 					}
 					
-					results.put(clip.getHeadline(), storedClip);
+					
+					
+					results.put(storedClip.getHeadline(), storedClip);
 				}
+				
+				
+				if (sourceTypeFilter != -1 && clip.getSourceType() != sourceTypeFilter)
+				{
+					results.remove(clip.getHeadline());
+				}
+				
+				
+				if (sourceRankFilter != -1 && clip.getSourceRank() > sourceRankFilter)
+				{
+					results.remove(clip.getHeadline());
+				}
+				
+				if (fullArticles)
+				{
+					 clip.setFullStory(getFullPage(clip));
+					
+					if (clip.getFullStory().indexOf("Senate ") == -1 
+							&& clip.getFullStory().indexOf("Sen ") == -1
+							&& clip.getFullStory().indexOf("Sen.") == -1)
+					{
+						results.remove(clip.getHeadline());
+					}
+						
+				}
+				
+						
 				
 			}
 			
 			
 		}
 		
-		System.out.println("query= " + queryTerm + "; hits=" + hits + "; uniq hits=" + uniqHits);
+		log.info("query= " + queryTerm + "; hits=" + hits + "; uniq hits=" + uniqHits);
 		
 		return results;
 	}
@@ -812,7 +999,7 @@ public class ClipsClient {
 		
 		if (results == null)
 		{
-			System.out.println ("results null for: " + queryTerm);
+			log.info ("results null for: " + queryTerm);
 			results = new LinkedHashMap<String, Clip>();
 		}
 		
@@ -874,7 +1061,7 @@ public class ClipsClient {
 			String anchor = URLEncoder.encode(clip.getHeadline());
 			if (anchor.length()>anchorLength)
 				anchor = anchor.substring(0,anchorLength);
-			out.append("<li style=\"margin:6px;\"><a href=\"#" + anchor + "\">" + headline + "</a>, ");
+			out.append("<li><a href=\"#" + anchor + "\">" + headline + "</a>, ");
 			out.append(clip.getSourceName());
 			out.append("\r\n");
 			
@@ -925,15 +1112,18 @@ public class ClipsClient {
 		{
 			clip = it.next();
 			
+			try
+			{
+			
 			String anchor = URLEncoder.encode(clip.getHeadline());
 			if (anchor.length()>anchorLength)
 				anchor = anchor.substring(0,anchorLength);
 			out.append("<a name=\"" + anchor  + "\"></a>");
 			
-			out.append("<div style=\"background-color:#eee;padding:3px;\"><a href=\"" + clip.getUrl() + "\" target=\"_new\">" + processHeadline(clip.getHeadline()) + "</a>, ");
+			out.append("<div class=\"headline\"><h4><a href=\"" + clip.getUrl() + "\" target=\"_new\">" + processHeadline(clip.getHeadline()) + "</a>, ");
 			out.append(clip.getSourceName());
 			
-			out.append("</div>");
+			out.append("</h4></div>");
 			out.append(sdf.format(clip.getTimestamp()));
 			out.append(" ");
 			out.append("(<a href=\"" + clip.getUrl() + "\" target=\"_new\">link</a>)");
@@ -941,9 +1131,13 @@ public class ClipsClient {
 			
 			if (fullArticles)
 			{
-				String page = getFullPage(clip);
-			
-				out.append(page);
+				if (clip.getFullStory() == null)
+				{
+					String page = getFullPage(clip);
+					clip.setFullStory(page);
+				}
+				
+				out.append(clip.getFullStory());
 			}
 			else
 			{
@@ -955,17 +1149,25 @@ public class ClipsClient {
 			out.append("<hr/>");
 			out.append("\r\n");
 			
+			}
+			catch (Exception e)
+			{
+				System.out.println("clip error: " + clip.getArticleId() + "=" + clip.getHeadline());
+			}
+			
 		}
 		
 		
 		return out.toString();
 	}
 	
+	
+	
 	public static String getFullPage (Clip clip)
 	{
 		StringBuffer out = new StringBuffer();
 		
-		System.out.println("fetching full story (rel=" + clip.getRelevance() + ") from " + clip.getSourceName() + "(rank=" + clip.getSourceRank() + "): " + clip.getUrl());
+		log.info("fetching full story (rel=" + clip.getRelevance() + ") from " + clip.getSourceName() + "(rank=" + clip.getSourceRank() + "): " + clip.getUrl());
 		
 		try
 		{
@@ -1098,6 +1300,8 @@ public class ClipsClient {
 	    	
 	    	String line =null;
 	    	
+	    	boolean prevLineBlank = false;
+	    	
 	    	while ((line = reader.readLine())!=null)
 	    	{
 	    		line = line.trim();
@@ -1107,7 +1311,17 @@ public class ClipsClient {
 	    			continue;
 	    		
 	    		out.append(line);
-	    		out.append("<br/>");
+	    		
+	    		if (line.length()<5 && (!prevLineBlank))
+	    		{
+	    			out.append("<br/><br/>");
+	    			prevLineBlank = true;
+	    		}
+	    		else
+	    		{
+	    			out.append(" ");
+	    			prevLineBlank = false;
+	    		}
 	    		
 	    	}
 	    	
@@ -1125,75 +1339,10 @@ public class ClipsClient {
 	 
 	 public static final String[] PAGE_FILTER_KEYS = {"Post new comment","Reader Comments","Reader's Comments","Leave a Reply"
 			,"Submit your comment","ADVERTISEMENT","Recent Comments","Post a comment","post a comment"
-			,"Email Story","References","Visible links","NEXT PAGE","Next Article","MOST POPULAR"
+			,"Email Story","Visible links","NEXT PAGE","Next Article","MOST POPULAR"
 			,"COMMENTS","Ads by Google","Add your comment","Related Content","Related Stories"
-			,"Leave a comment","Leave a Comment","Loading commenting interface...","Comments"};//,"THIS WEEK'S HOT TOPICS","Text Size: Normal | Large | Larger"};
+			,"Leave a comment","Leave a Comment","Loading commenting interface...","Tags:","tags:","Article Rating","comments:","Comments:","Today's Top Picks","Your thoughts"};//,"THIS WEEK'S HOT TOPICS","Text Size: Normal | Large | Larger"};
 	
-
-/*
-	public final static String[] SENATOR_TOPIC_IDS = {"06iB8Jj7h2e8p",
-	"0gGSeKN2oN1LQ",
-	"09dPgIz3YE5YZ",
-	"0fVBfwR8FT1xp",
-	"08Ng5ua2sm6zm",
-	"0aFa3wy63g7rC",
-	"0dHvdDtbw06iX",
-	"06wVccL8Kk3Kq",
-	"02ttcmW9Mj1mV",
-	"0duxec66VcbgC",
-	"0bM60c735EgmG",
-	"0cLBaEBejCawi",
-	"06xp0AFeAD8qp",
-	"0cXr31t3OP2FY",
-	"0aqDf072jWgk1",
-	"0c4V20rdLiar2",
-	"04EX4OD0JS4CM",
-	"0d1vfGV31V0SQ",
-	"05fn2yKcnG6ta",
-	"00mjfaPaBeehV",
-	"0f23a4n6QP9KF",
-	"03cweGPd0Hfi0",
-	"0gN75cE12Xba6",
-	"02Aw62d0XSbAh",
-	"020bcHPaaI6Nk",
-	"0cs74rHc3T5Ez",
-	"0a9Xgs2e7U5oK",
-	"0d5G7Wwfza1fb",
-	"05JOgrG3hN7P6",
-	"0e8Q6Nr0jOc57",
-	"0bNngHT8QybZw",
-	"095yboE30Q2rI",
-	"02JbaQMe7ybvt",
-	"05sp1FCgOecKL",
-	"089ubxt5216Gn",
-	"09q76Vm4Kc5QU",
-	"0gQG7IBftDcLc",
-	"0dCgdjO0n9eeH",
-	"08Esa0A9Ghc8z",
-	"02uj8GSgrP4zg",
-	"0e0w6e23sCbyR",
-	"0eWE7gH9jIeik",
-	"0g152F3bGT2l6",
-	"0g6z64R5qq9Hi",
-	"02xz9dAesZ1Gj",
-	"0fw702N8Elgvc",
-	"07Ev3ef6qS6Os",
-	"03N08grddRdOd",
-	"02VH4lA1wg9Er",
-	"0g24dGY1freHQ",
-	"00ozdZEerbfq9",
-	"08z704341SdQr",
-	"05epeVufPd9eq",
-	"00Tjg1E1AR3Pz",
-	"0cgQ2KtfxQ3J9",
-	"0bq2gjE1hSfWw",
-	"01GVgJzgFI8Gb",
-	"08gn7oibLt4qe",
-	"0gtKduU3Cf1Pn",
-	"01GmeM31kb380",
-	"0c6o1eV8Oa451",
-	"04IG85I0x7dQE"};
-*/
 
 
 public final static String[][] SENATOR_TOPIC_IDS = {
@@ -1364,7 +1513,7 @@ public final static String[][] SENATOR_TOPIC_IDS = {
 {"","Catharine Young"},
 
 {"State Offices","LABEL"},
-{"Governor David A. Paterson ","xxx"},
+{"Governor David A. Paterson","xxx"},
 {"","Governer Paterson"},
 {"","David A. Paterson"},
 {"","David Paterson"},

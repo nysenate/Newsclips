@@ -1,4 +1,4 @@
-package com.daylife.src.daypi;
+package gov.nysenate.newsclips;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -94,7 +94,8 @@ public class DayPIClient {
 			InputStream inputStream = conn.getInputStream();
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			Document doc = builder.parse(inputStream);
-			doc.normalizeDocument();
+			//doc.normalizeDocument();
+			doc.normalize();
 			return doc;
 		}
 		catch(Exception e) {

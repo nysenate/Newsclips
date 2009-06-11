@@ -1,4 +1,4 @@
-package org.nysenatecio.clips;
+package gov.nysenate.newsclips;
 
 import java.io.*;
 
