@@ -1,8 +1,5 @@
 Senator Eric Adams|06iB8Jj7h2e8p
 |Eric Adams
-Senator James Alesi|0gGSeKN2oN1LQ
-|James Alesi
-|Jim Alesi
 Senator Joseph P Addabbo Jr|02VH4lA1wg9Er
 |Joseph P. Addabbo
 |Joseph Addabbo
@@ -13,6 +10,9 @@ Senator Gregory Ball|xxx
 |Gregory Ball
 Senator John Bonacic|09dPgIz3YE5YZ
 |John Bonacic
+Senator Philip M. Boyle|xxx
+|Philip Boyle
+|Phil Boyle
 Senator Neil Breslin|0fVBfwR8FT1xp
 |Neil Breslin
 Senator David Carlucci|xxx
@@ -24,13 +24,12 @@ Senator Ruben Diaz|0aFa3wy63g7rC
 Senator Martin Malave Dilan|08z704341SdQr
 |Martin Malave Dilan
 |Martin Dilan
-Senator Thomas Duane|0dHvdDtbw06iX
-|Thomas Duane
-|Tom Duane
 Senator Adriano Espaillat|xxx
 |Adriano Espaillat
 Senator Hugh Farley|06wVccL8Kk3Kq
 |Hugh Farley
+Senator Simcha Felder|xxx
+|Simcha Felder
 Senator John Flanagan|02ttcmW9Mj1mV
 |John Flanagan
 Senator Charles Fuschillo|0duxec66VcbgC
@@ -40,8 +39,11 @@ Senator Patrick Gallivan|xxx
 |Patrick Gallivan
 Senator Michael Gianaris|xxx
 |Michael Gianaris
+Senator Terry Gipson|xxx
+|Terry Gipson
 Senator Martin Golden|0bM60c735EgmG
 |Martin Golden
+|Marty Golden
 Senator Joseph A. Griffo|03N08grddRdOd
 |Joseph A. Griffo
 |Joseph Griffo
@@ -51,11 +53,8 @@ Senator Kemp Hannon|0cLBaEBejCawi
 |Kemp Hannon
 Senator Ruth Hassell-Thompson|0bq2gjE1hSfWw
 |Ruth Hassell-Thompson
-Senator Shirley L. Huntley|01GVgJzgFI8Gb
-|Shirley L. Huntley
-|Shirley Huntley
-Senator Owen Johnson|06xp0AFeAD8qp
-|Owen Johnson
+Senator Brad Hoylman|xxx
+|Brad Hoylman
 Senator Timothy Kennedy|xxx
 |Timothy Kennedy
 Senator Jeffrey Klein|0cXr31t3OP2FY
@@ -63,31 +62,31 @@ Senator Jeffrey Klein|0cXr31t3OP2FY
 |Jeff Klein
 Senator Liz Krueger|0aqDf072jWgk1
 |Liz Krueger
-Senator Carl Kruger|09q76Vm4Kc5QU
-|Carl Kruger
 Senator Andrew Lanza|0c4V20rdLiar2
 |Andrew Lanza
 Senator Bill Larkin|04EX4OD0JS4CM
 |Bill Larkin
+Senator George S. Latimer|xxx
+|George Latimer
 Senator Kenneth LaValle|0d1vfGV31V0SQ
 |Kenneth LaValle
 |Ken LaValle
 Senator Thomas W. Libous|0gtKduU3Cf1Pn
-|Thomas W. Libous
 |Thomas Libous
 |Tom Libous
-Senator Elizabeth O'C. Little|0eWE7gH9jIeik
-|Elizabeth O'C. Little
+Senator Elizabeth Little|0eWE7gH9jIeik
 |Elizabeth Little
+|Betty Little
 Senator Carl Marcellino|05fn2yKcnG6ta
 |Carl Marcellino
+Senator Kathleen A. Marchione|xxx
+|Kathleen Marchione
+|Kathy Marchione
 Senator Jack Martins|xxx
 |Jack Martins
 Senator George D Maziarz|0a9Xgs2e7U5oK
 |George D. Maziarz
 |George Maziarz
-Senator Roy McDonald|0d5G7Wwfza1fb
-|Roy McDonald
 Senator Velmanette Montgomery|01GmeM31kb380
 |Velmanette Montgomery
 |Velma Montgomery
@@ -95,15 +94,16 @@ Senator Michael F. Nozzolio|05epeVufPd9eq
 |Michael F. Nozzolio
 |Michael Nozzolio
 |Mike Nozzolio
+Senator Ted O'Brien|xxx
+|Ted O'Brien
 Senator Thomas O'Mara|xxx
 |Thomas O'Mara
-Senator Suzi Oppenheimer|08gn7oibLt4qe
-|Suzi Oppenheimer
 Senator Kevin S. Parker|0g24dGY1freHQ
 |Kevin S. Parker
 |Kevin Parker
 Senator Jose R. Peralta|xxx
 |Jose R. Peralta
+|Jose Peralta
 Senator Bill Perkins|0gN75cE12Xba6
 |Bill Perkins
 Senator Michael H. Ranzenhofer|00Tjg1E1AR3Pz
@@ -112,22 +112,22 @@ Senator Michael H. Ranzenhofer|00Tjg1E1AR3Pz
 |Mike Ranzenhofer
 Senator Patricia Ritchie|xxx
 |Patricia Ritchie
+|Patty Ritchie
 Senator Gustavo Rivera|xxx
 |Gustavo Rivera
 Senator Joseph Robach|02Aw62d0XSbAh
 |Joseph Robach
 |Joe Robach
-Senator Stephen Saland|020bcHPaaI6Nk
-|Stephen Saland
 Senator John L. Sampson|07Ev3ef6qS6Os
 |John L. Sampson
 |John Sampson
+Senator James Sanders|xxx
+|James Sanders
 Senator Diane Savino|0cs74rHc3T5Ez
 |Diane Savino
 Senator Jose Serrano|02JbaQMe7ybvt
 |Jose Serrano
 Senator James L. Seward|0fw702N8Elgvc
-|James L. Seward
 |James Seward
 |Jim Seward
 Senator Dean Skelos|05JOgrG3hN7P6
@@ -143,20 +143,23 @@ Senator Toby Ann Stavisky|095yboE30Q2rI
 |Toby Stavisky
 Senator Andrea Stewart-Cousins|0e8Q6Nr0jOc57
 |Andrea Stewart-Cousins
+Senator Cecilia Tkaczyk|xxx
+|Cecilia Tkaczyk
+|Cece Tkaczyk
 Senator David J. Valesky|0e0w6e23sCbyR
 |David J. Valesky
 |David Valesky
 Senator Catharine M. Young|0gQG7IBftDcLc
 |Catharine M. Young
 |Catharine Young
-Senator Lee Zeldin|xxx
+Senator Lee M. Zeldin|xxx
 |Lee Zeldin
 State Offices|LABEL
 Governor Andrew M. Cuomo|xxx
-|Governer Cuomo
+|Governor Cuomo
 |Andrew M. Cuomo
 |Andrew Cuomo
-Attorney Eric T. Schneiderman|0g152F3bGT2l6
+Attorney General Eric T. Schneiderman|0g152F3bGT2l6
 |Eric T. Schneiderman
 |Eric Schneiderman
 State Comptroller Thomas P. DiNapoli|xxx
