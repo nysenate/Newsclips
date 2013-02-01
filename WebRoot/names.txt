@@ -6,13 +6,17 @@ Senator James Alesi|0gGSeKN2oN1LQ
 Senator Joseph P Addabbo Jr|02VH4lA1wg9Er
 |Joseph P. Addabbo
 |Joseph Addabbo
-Senator Darrel J. Aubertine|02uj8GSgrP4zg
-|Darrel J. Aubertine
-|Darrel Aubertine
+Senator Anthony Avella|xxx
+|Anthony Avella
+|Tony Avella
+Senator Gregory Ball|xxx
+|Gregory Ball
 Senator John Bonacic|09dPgIz3YE5YZ
 |John Bonacic
 Senator Neil Breslin|0fVBfwR8FT1xp
 |Neil Breslin
+Senator David Carlucci|xxx
+|David Carlucci
 Senator John DeFrancisco|08Ng5ua2sm6zm
 |John DeFrancisco
 Senator Ruben Diaz|0aFa3wy63g7rC
@@ -23,23 +27,26 @@ Senator Martin Malave Dilan|08z704341SdQr
 Senator Thomas Duane|0dHvdDtbw06iX
 |Thomas Duane
 |Tom Duane
-Senator Pedro Espada Jr.|0cgQ2KtfxQ3J9
-|Pedro Espada
+Senator Adriano Espaillat|xxx
+|Adriano Espaillat
 Senator Hugh Farley|06wVccL8Kk3Kq
 |Hugh Farley
 Senator John Flanagan|02ttcmW9Mj1mV
 |John Flanagan
-Senator Brian X. Foley|089ubxt5216Gn
-|Brian X. Foley
-|Brian Foley
 Senator Charles Fuschillo|0duxec66VcbgC
 |Charles Fuschillo
 |Chuck Fuschillo
+Senator Patrick Gallivan|xxx
+|Patrick Gallivan
+Senator Michael Gianaris|xxx
+|Michael Gianaris
 Senator Martin Golden|0bM60c735EgmG
 |Martin Golden
 Senator Joseph A. Griffo|03N08grddRdOd
 |Joseph A. Griffo
 |Joseph Griffo
+Senator Mark Grisanti|xxx
+|Mark Grisanti
 Senator Kemp Hannon|0cLBaEBejCawi
 |Kemp Hannon
 Senator Ruth Hassell-Thompson|0bq2gjE1hSfWw
@@ -47,11 +54,10 @@ Senator Ruth Hassell-Thompson|0bq2gjE1hSfWw
 Senator Shirley L. Huntley|01GVgJzgFI8Gb
 |Shirley L. Huntley
 |Shirley Huntley
-Senator Craig M. Johnson|0dCgdjO0n9eeH
-|Craig M. Johnson
-|Craig Johnson
 Senator Owen Johnson|06xp0AFeAD8qp
 |Owen Johnson
+Senator Timothy Kennedy|xxx
+|Timothy Kennedy
 Senator Jeffrey Klein|0cXr31t3OP2FY
 |Jeffrey Klein
 |Jeff Klein
@@ -66,10 +72,6 @@ Senator Bill Larkin|04EX4OD0JS4CM
 Senator Kenneth LaValle|0d1vfGV31V0SQ
 |Kenneth LaValle
 |Ken LaValle
-Senator Vincent L. Leibell III|0c6o1eV8Oa451
-|Vincent L. Leibell III
-|Vincent Leibell
-|Vince Leibell
 Senator Thomas W. Libous|0gtKduU3Cf1Pn
 |Thomas W. Libous
 |Thomas Libous
@@ -79,6 +81,8 @@ Senator Elizabeth O'C. Little|0eWE7gH9jIeik
 |Elizabeth Little
 Senator Carl Marcellino|05fn2yKcnG6ta
 |Carl Marcellino
+Senator Jack Martins|xxx
+|Jack Martins
 Senator George D Maziarz|0a9Xgs2e7U5oK
 |George D. Maziarz
 |George Maziarz
@@ -87,19 +91,14 @@ Senator Roy McDonald|0d5G7Wwfza1fb
 Senator Velmanette Montgomery|01GmeM31kb380
 |Velmanette Montgomery
 |Velma Montgomery
-Senator Thomas Morahan|00mjfaPaBeehV
-|Thomas Morahan
-|Tom Morahan
 Senator Michael F. Nozzolio|05epeVufPd9eq
 |Michael F. Nozzolio
 |Michael Nozzolio
 |Mike Nozzolio
-Senator George Onorato|0f23a4n6QP9KF
-|George Onorato
+Senator Thomas O'Mara|xxx
+|Thomas O'Mara
 Senator Suzi Oppenheimer|08gn7oibLt4qe
 |Suzi Oppenheimer
-Senator Frank Padavan|03cweGPd0Hfi0
-|Frank Padavan
 Senator Kevin S. Parker|0g24dGY1freHQ
 |Kevin S. Parker
 |Kevin Parker
@@ -111,6 +110,10 @@ Senator Michael H. Ranzenhofer|00Tjg1E1AR3Pz
 |Michael H. Ranzenhofer
 |Michael Ranzenhofer
 |Mike Ranzenhofer
+Senator Patricia Ritchie|xxx
+|Patricia Ritchie
+Senator Gustavo Rivera|xxx
+|Gustavo Rivera
 Senator Joseph Robach|02Aw62d0XSbAh
 |Joseph Robach
 |Joe Robach
@@ -121,9 +124,6 @@ Senator John L. Sampson|07Ev3ef6qS6Os
 |John Sampson
 Senator Diane Savino|0cs74rHc3T5Ez
 |Diane Savino
-Senator Eric T. Schneiderman|0g152F3bGT2l6
-|Eric T. Schneiderman
-|Eric Schneiderman
 Senator Jose Serrano|02JbaQMe7ybvt
 |Jose Serrano
 Senator James L. Seward|0fw702N8Elgvc
@@ -138,35 +138,27 @@ Senator Malcolm A. Smith|00ozdZEerbfq9
 Senator Daniel L. Squadron|08Esa0A9Ghc8z
 |Daniel L. Squadron
 |Daniel Squadron
-Senator William T. Stachowski|04IG85I0x7dQE
-|William T. Stachowski
-|William Stachowski
 Senator Toby Ann Stavisky|095yboE30Q2rI
 |Toby Ann Stavisky
 |Toby Stavisky
 Senator Andrea Stewart-Cousins|0e8Q6Nr0jOc57
 |Andrea Stewart-Cousins
-Senator Antoine M. Thompson|05sp1FCgOecKL
-|Antoine Thompson
 Senator David J. Valesky|0e0w6e23sCbyR
 |David J. Valesky
 |David Valesky
-Senator Dale Volker|0bNngHT8QybZw
-|Dale Volker
-Senator George H. Winner Jr.|0g6z64R5qq9Hi
-|George H. Winner Jr.
-|George Winner
 Senator Catharine M. Young|0gQG7IBftDcLc
 |Catharine M. Young
 |Catharine Young
+Senator Lee Zeldin|xxx
+|Lee Zeldin
 State Offices|LABEL
-Governor David A. Paterson|xxx
-|Governer Paterson
-|David A. Paterson
-|David Paterson
-Attorney General Andrew M. Cuomo|xxx
+Governor Andrew M. Cuomo|xxx
+|Governer Cuomo
 |Andrew M. Cuomo
 |Andrew Cuomo
+Attorney Eric T. Schneiderman|0g152F3bGT2l6
+|Eric T. Schneiderman
+|Eric Schneiderman
 State Comptroller Thomas P. DiNapoli|xxx
 |Thomas P. DiNapoli
 |Thomas DiNapoli
