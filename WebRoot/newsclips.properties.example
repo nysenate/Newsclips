@@ -1,0 +1,3 @@
+accesskey=<ACCESS KEY>
+sharedsecret=<SHARED SECRET>
+lynxcmd=/usr/bin/lynx -dump
