@@ -1,3 +1,9 @@
 
 Newsclips - News aggregation for NYSenate users.
 
+
+This web application depends on the following external JARs:
+commons-logging.jar
+jgroups-all.jar
+oscache-2.4.1.jar
+
