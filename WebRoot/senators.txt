@@ -1,0 +1,69 @@
+
+
+/*
+ * Smith, Malcolm A.	Majority
+Adams, Eric	Majority
+Addabbo, Joseph P, Jr	Majority
+Aubertine, Darrel J.	Majority
+Breslin, Neil D.	Majority
+Diaz, Ruben , Sr.	Majority
+Dilan, Martin Malave	Majority
+Duane, Thomas K.	Majority
+Espada, Pedro , Jr.	Majority
+Foley, Brian X.	Majority
+Hassell-Thompson, Ruth	Majority
+Huntley, Shirley L.	Majority
+Johnson, Craig M.	Majority
+Klein, Jeffrey D.	Majority
+Krueger, Liz	Majority
+Kruger, Carl	Majority
+Monserrate, Hiram	Majority
+Montgomery, Velmanette	Majority
+Onorato, George	Majority
+Oppenheimer, Suzi	Majority
+Parker, Kevin S.	Majority
+Perkins, Bill	Majority
+Sampson, John L.	Majority
+Savino, Diane J.	Majority
+Schneiderman, Eric T.	Majority
+Serrano, José M.	Majority
+Squadron, Daniel L.	Majority
+Stachowski, William T.	Majority
+Stavisky, Toby Ann	Majority
+Stewart-Cousins, Andrea	Majority
+Thompson, Antoine M.	Majority
+Valesky, David J.	Majority
+
+
+Skelos, Dean G.	Minority
+Alesi, James S.	Minority
+Bonacic, John J.	Minority
+DeFrancisco, John A.	Minority
+Farley, Hugh T.	Minority
+Flanagan, John J.	Minority
+Fuschillo, Charles J., Jr.	Minority
+Golden, Martin J.	Minority
+Griffo, Joseph A.	Minority
+Hannon, Kemp	Minority
+Johnson, Owen H.	Minority
+Lanza, Andrew J.	Minority
+Larkin, William J., Jr.	Minority
+LaValle, Kenneth P.	Minority
+Leibell, Vincent L., III	Minority
+Libous, Thomas W.	Minority
+Little, Elizabeth O'C.	Minority
+Marcellino, Carl L.	Minority
+Maziarz, George D.	Minority
+McDonald, Roy J.	Minority
+Morahan, Thomas P.	Minority
+Nozzolio, Michael F.	Minority
+Padavan, Frank	Minority
+Ranzenhofer, Michael H.	Minority
+Robach, Joseph E.	Minority
+Saland, Stephen M.	Minority
+Seward, James L.	Minority
+Volker, Dale M.	Minority
+Winner, George H., Jr.	Minority
+Young, Catharine M. 	Minority
+
+*/
