@@ -44,9 +44,10 @@ if (term == null) term = "";
 <jsp:include page="header.jsp"/>
 
 
- <div style="font-size:14pt;margin:10px;background:white;padding:3px;">
- Welcome to the new NY Senate Open Newsclip service, developed by the CIO's office and powered by our partner, DayLife.
- This service allows you to search and browse online news from the last 24 hours utilizing both local, New York-area news, as well as
+<div style="font-size:14pt;margin:10px;background:white;padding:3px;">
+Welcome to the New York State Senate Newsclips service, developed by Senate
+Technology Services and powered by our partner, DayLife.
+This service allows you to search and browse online news from the last 24 hours utilizing both local, New York-area news, as well as
  sources from around the globe.
  <br/><br/>
  - <a href="names.jsp">Senator Names</a>: these stories are updated every 3 hours with the latest articles matching members of the Senate and prominent State offices, as well.
